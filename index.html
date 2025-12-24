@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>المحامي علي الحمداني</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Cairo',sans-serif;
+  background:#0e0e0e;
+  color:#fff;
+}
+header{
+  background:linear-gradient(135deg,#000,#1a1a1a);
+  padding:60px 20px;
+}
+.container{max-width:1200px;margin:auto}
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:50px;
+}
+nav a{color:#fff;text-decoration:none;margin-right:15px}
+nav a:hover{color:#c9a24d}
+
+.hero{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+}
+.hero h1{color:#c9a24d;font-size:42px}
+.hero p{font-size:18px;line-height:1.9}
+
+section{padding:60px 20px}
+h2{text-align:center;color:#c9a24d;font-size:32px}
+
+.services{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+  margin-top:40px;
+}
+.card{
+  background:#1c1c1c;
+  padding:30px;
+  border-radius:16px;
+}
+
+footer{
+  background:#000;
+  padding:30px;
+  text-align:center;
+  color:#aaa;
+}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container">
+<nav>
+<strong>المحامي علي الحمداني</strong>
+<div>
+<a href="index.html">الرئيسية</a>
+<a href="articles.html">المقالات القانونية</a>
+</div>
+</nav>
+
+<div class="hero">
+<div>
+<h1 id="heroTitle">خبرة قانونية رفيعة المستوى</h1>
+<p id="heroText"></p>
+</div>
+<img src="https://i.top4top.io/p_3631ypub61.png" style="width:100%;border-radius:20px">
+</div>
+</div>
+</header>
+
+<section>
+<h2>مجالات التخصص</h2>
+<div class="services">
+<div class="card">القانون الجنائي</div>
+<div class="card">القانون المدني</div>
+<div class="card">الأحوال الشخصية</div>
+<div class="card">القانون التجاري</div>
+<div class="card">القانون الإداري</div>
+<div class="card">الاستشارات القانونية</div>
+</div>
+</section>
+
+<footer>
+© جميع الحقوق محفوظة للمحامي علي الحمداني
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey:"AIzaSyAW3c5b_n5qWP6M4cLqmHPF8D5b4DhWn4I",
+  projectId:"bill-2a791"
+});
+
+const db = getFirestore(app);
+const snap = await getDoc(doc(db,"site","content"));
+if(snap.exists()){
+  heroTitle.innerText = snap.data().heroTitle;
+  heroText.innerText = snap.data().heroText;
+}
+</script>
+
+</body>
+</html>

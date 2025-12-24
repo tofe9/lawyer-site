@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title id="metaTitle">مقال قانوني</title>
+<meta name="description" id="metaDesc">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body style="font-family:'Cairo';background:#fff;color:#000;padding:40px">
+
+<h1 id="title"></h1>
+<div id="content"></div>
+
+<script type="application/ld+json" id="schema"></script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+
+const id=new URLSearchParams(location.search).get("id");
+
+const app=initializeApp({
+  apiKey:"AIzaSyAW3c5b_n5qWP6M4cLqmHPF8D5b4DhWn4I",
+  projectId:"bill-2a791"
+});
+const db=getFirestore(app);
+
+const s=await getDoc(doc(db,"articles",id));
+if(s.exists()){
+  metaTitle.innerText=s.data().title;
+  metaDesc.setAttribute("content",s.data().description);
+  title.innerText=s.data().title;
+  content.innerHTML=s.data().content;
+
+  document.getElementById("schema").innerText=JSON.stringify({
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":s.data().title,
+    "description":s.data().description,
+    "author":{"@type":"Person","name":"المحامي علي الحمداني"}
+  });
+}
+</script>
+
+</body>
+</html>
